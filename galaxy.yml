@@ -1,0 +1,12 @@
+namespace: m4eba
+name: common
+version: 0.1.0
+readme: README.md
+authors:
+  - m4eba
+description: An ansible collection with common roles.
+license_file: 'LICENSE'
+tags: []
+dependencies: { }
+repository: http://github.com/m4eba/ansible-common
+issues: http://github.com/m4eba/ansible-common/issues
