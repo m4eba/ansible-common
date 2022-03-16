@@ -5,7 +5,7 @@
   changed_when: false
 - name: set swap_used
   ansible.builtin.set_fact:
-    swap_used: '{{ swap_used_out.stdout_lines | length > 0 }'
+    swap_used: '{{ swap_used_out.stdout_lines | length > 0 }}'
 - name: disable swap
   become: true
   ansible.builtin.command: swapoff -a
