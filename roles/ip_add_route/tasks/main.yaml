@@ -1,0 +1,12 @@
+---
+- name: check for existing route
+  ansible.builtin.command: ip -j route show {{ address }} via {{ gateway }}
+  register: __existing_route_output
+- ansible.builtin.set_fact:
+    __existing_route: '{{ __existing_route_output.stdout }}'
+- debug:
+    var: __existing_route
+- name: add route
+  become: true
+  ansible.builtin.command: ip route add {{ address }} via {{ gateway }}
+  when: __existing_route | length == 0

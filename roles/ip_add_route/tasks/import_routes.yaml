@@ -1,0 +1,14 @@
+---
+- set_fact:
+    __routeArray: "{{ item.split() }}"
+- set_fact:
+    __route:
+      dest: "{{ __routeArray[0] }}"
+      gateway: "{{ __routeArray[1] }}"
+      netmask: "{{ __routeArray[2] }}"
+      interface: "{{ __routeArray[7] }}"
+  when: __routeArray | length == 8
+- set_fact:
+    __routes_list: "{{ __routes_list }} + [ {{ __route }}]"
+  when: __routeArray | length == 8
+      
