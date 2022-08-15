@@ -2,6 +2,7 @@
 - name: check for existing route
   ansible.builtin.command: ip -j route show {{ address }} via {{ gateway }}
   register: __existing_route_output
+  changed_when: false
 - ansible.builtin.set_fact:
     __existing_route: '{{ __existing_route_output.stdout }}'
 - debug:
