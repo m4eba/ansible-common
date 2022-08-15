@@ -1,0 +1,17 @@
+---
+- name: generate command
+  ansible.builtin.set_fact:
+    __nat_command: -A POSTROUTING -s {{ ip_nat_source }} -o {{ ip_nat_interface }} -j SNAT --to-source {{ ip_nat_to_source }}
+- name: check for existing roule
+  ansible.builtin.command: iptables -t nat -S
+  register: __existing_rule_output
+  changed_when: false
+- name: debug command
+  ansible.builtin.debug:
+    var: __nat_command
+- name: debug existing rules
+  ansible.builtin.debug:
+    var: __existing_rule_output.stdout_lines
+- name: set rule
+  ansible.builtin.command: iptables -t nat {{ __nat_command }}
+  when: not __nat_command in __existing_rule_output.stdout_lines
